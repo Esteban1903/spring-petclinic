@@ -19,7 +19,8 @@ pipeline {
         stage('Build Docker Image') {
             agent any
             steps {
-                sh 'docker build -t esteban1903/spring-petclinic:latest .'
+                
+                sh 'docker build -t esteban652/spring-petclinic:latest .'
             }
         }
 
@@ -28,7 +29,8 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerHub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-                    sh 'docker push esteban1903/spring-petclinic:latest'
+                   
+                    sh 'docker push esteban652/spring-petclinic:latest'
                 }
             }
         }
