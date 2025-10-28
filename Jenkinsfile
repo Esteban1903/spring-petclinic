@@ -5,11 +5,13 @@ pipeline {
         stage('Build with Maven') {
             agent {
                 docker {
-                    image 'maven:3.9.9-eclipse-temurin-21'
+                    image 'eclipse-temurin:25-jdk'
                     reuseNode true
                 }
             }
             steps {
+                sh 'apt-get update && apt-get install -y maven'
+                sh 'mvn -version'
                 sh 'mvn clean package -DskipTests'
             }
         }
